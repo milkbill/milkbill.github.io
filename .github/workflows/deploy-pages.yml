@@ -33,7 +33,7 @@ jobs:
       - name: Build static site
         run: npm run build:pages
         env:
-          NEXT_PUBLIC_SITE_URL: https://kawaldeepsingh93.github.io/milktrack-website
+          NEXT_PUBLIC_SITE_URL: https://milkbill.github.io
           NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY: ${{ secrets.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY }}
 
       - name: Upload artifact

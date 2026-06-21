@@ -66,29 +66,30 @@ npm run lint     # ESLint
 
 This site is a **static export** (`out/`) — no Node server required. Good fits: GitHub Pages, Netlify, Cloudflare Pages, or any static host.
 
-### GitHub Pages (recommended for this repo)
+### GitHub Pages
 
-Live URL after setup: **https://kawaldeepsingh93.github.io/milktrack-website/**
+Live URL: **https://milkbill.github.io/**
 
-1. Push this repo to GitHub (`kawaldeepsingh93/milktrack-website`).
-2. In the repo: **Settings → Pages → Build and deployment → Source: GitHub Actions**.
-3. Add a repository secret: **Settings → Secrets → Actions → New secret**
+Repo: [milkbill/milkbill.github.io](https://github.com/milkbill/milkbill.github.io)
+
+1. In the repo: **Settings → Pages → Build and deployment → Source: GitHub Actions**.
+2. Add a repository secret: **Settings → Secrets → Actions → New secret**
    - Name: `NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY`
    - Value: your [Web3Forms](https://web3forms.com) access key (same as in `.env.local`)
-4. Push to `main` (or run the **Deploy to GitHub Pages** workflow manually).
+3. Push to `main` (or run the **Deploy to GitHub Pages** workflow manually).
 
 The workflow in `.github/workflows/deploy-pages.yml` builds with `npm run build:pages` and publishes the `out/` folder.
 
 Preview the production build locally:
 
 ```bash
-npm run build:pages
+npm run build
 npx serve out
 ```
 
 ### Custom domain (optional)
 
-To use `milkbill.app` instead of the `github.io` URL, point your DNS at GitHub Pages and add the domain under **Settings → Pages**. Then deploy without `GITHUB_PAGES=true` (e.g. Vercel or a static host) so URLs are not prefixed with `/milktrack-website`.
+To use `milkbill.app`, point DNS at GitHub Pages and add the domain under **Settings → Pages** on `milkbill/milkbill.github.io`.
 
 ### Vercel (alternative)
 
