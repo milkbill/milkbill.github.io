@@ -1,36 +1,100 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Milk Bill — Marketing Website
 
-## Getting Started
+Premium marketing website for the [Milk Bill](https://play.google.com/store/apps/details?id=com.milktrack.customer) Android app.
 
-First, run the development server:
+**Location:** `~/Documents/code/milk-bill-website`
+
+## Tech Stack
+
+- Next.js 16 (App Router)
+- TypeScript
+- Tailwind CSS v4
+- Framer Motion
+- GSAP ScrollTrigger
+- Lenis smooth scrolling
+- shadcn/ui-style components
+- Lucide Icons
+- Resend (contact form emails)
+
+## Quick Start
 
 ```bash
+cd ~/Documents/code/milk-bill-website
+npm install
+cp .env.example .env.local
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Contact Form Setup
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+The contact form sends emails to **planetkawal@gmail.com** via [Resend](https://resend.com).
 
-## Learn More
+1. Create a free account at [resend.com](https://resend.com)
+2. Generate an API key
+3. Add to `.env.local`:
 
-To learn more about Next.js, take a look at the following resources:
+```env
+RESEND_API_KEY=re_your_api_key_here
+RESEND_FROM_EMAIL=Milk Bill <onboarding@resend.dev>
+NEXT_PUBLIC_SITE_URL=http://localhost:3000
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+For production, verify your domain in Resend and update `RESEND_FROM_EMAIL` to use your domain (e.g. `Milk Bill <hello@yourdomain.com>`).
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Pages
 
-## Deploy on Vercel
+| Route | Description |
+|-------|-------------|
+| `/` | Marketing homepage |
+| `/privacy-policy` | Play Store-ready privacy policy |
+| `/terms-and-conditions` | Terms of use |
+| `/contact` | Contact form |
+| `/support` | Support & help |
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Scripts
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+npm run dev      # Development server
+npm run build    # Production build
+npm run start    # Start production server
+npm run lint     # ESLint
+```
+
+## Deployment
+
+This site is a **static export** (`out/`) — no Node server required. Good fits: GitHub Pages, Netlify, Cloudflare Pages, or any static host.
+
+### GitHub Pages (recommended for this repo)
+
+Live URL after setup: **https://kawaldeepsingh93.github.io/milktrack-website/**
+
+1. Push this repo to GitHub (`kawaldeepsingh93/milktrack-website`).
+2. In the repo: **Settings → Pages → Build and deployment → Source: GitHub Actions**.
+3. Add a repository secret: **Settings → Secrets → Actions → New secret**
+   - Name: `NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY`
+   - Value: your [Web3Forms](https://web3forms.com) access key (same as in `.env.local`)
+4. Push to `main` (or run the **Deploy to GitHub Pages** workflow manually).
+
+The workflow in `.github/workflows/deploy-pages.yml` builds with `npm run build:pages` and publishes the `out/` folder.
+
+Preview the production build locally:
+
+```bash
+npm run build:pages
+npx serve out
+```
+
+### Custom domain (optional)
+
+To use `milkbill.app` instead of the `github.io` URL, point your DNS at GitHub Pages and add the domain under **Settings → Pages**. Then deploy without `GITHUB_PAGES=true` (e.g. Vercel or a static host) so URLs are not prefixed with `/milktrack-website`.
+
+### Vercel (alternative)
+
+[Vercel](https://vercel.com) works with zero config for Next.js: connect the repo, set `NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY` and `NEXT_PUBLIC_SITE_URL`, deploy. No `basePath` needed for a custom domain.
+
+## Related
+
+- Android app: `~/Documents/code/milk-customer-app`
+- Play Store: [com.milktrack.customer](https://play.google.com/store/apps/details?id=com.milktrack.customer)
